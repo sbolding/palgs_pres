@@ -111,8 +111,7 @@ centered, text width=2cm, draw=black, text=white,fill=Gray!140!blue!70!white]
 %Aggie-themed
 \pgfdeclareimage[height=0.1in]{TAMUlogo}{tamu_engineering.png}
 \logo{\raisebox{-8pt}{\pgfuseimage{TAMUlogo}}}
-\titlegraphic{\centering\begin{tabular}{lr}\includegraphics[trip=4.0in 0.0in 0.0in 0.0in,clip,height=0.18\textheight]{NEUP.jpg} &
-\includegraphics[height=0.18\textheight]{tamu_seal.png}\end{tabular}}
+\titlegraphic{\centering\includegraphics[height=0.18\textheight]{tamu_seal.png}}
 %Michigan-themed
 %\pgfdeclareimage[height=0.1in]{UMlogo}{michigan_engineering.png}
 %\logo{\raisebox{-8pt}{\pgfuseimage{UMlogo}}}
@@ -142,11 +141,9 @@ centered, text width=2cm, draw=black, text=white,fill=Gray!140!blue!70!white]
 
   % This will typeset only the frames (or slides) that have the given label ("current" in this case).
 
-\title[HOLO for TRT]{A High-Order Low-Order Algorithm with Exponentially-Convergent Monte Carlo for
-    Thermal Radiative Transfer}
-    \author[S.R. Bolding]{{\large Simon Bolding\inst{1}, Jim Morel\inst{1}, and Mathew Cleveland\inst{2}}}
-    \institute[]{{\large \inst{1} Texas A\&M University\\ \inst{2} Los Alamos National Laboratory}}
-\date{{MC 2015 - April 22} }
+\title[HOLO]{Parallelization for a Pure Absorber Residual Monte Carlo Transport Code}
+\author[S.R. Bolding]{{\large Simon Bolding}}
+\date{{30 April 2015} }
 \subject{}
 %\institute{Los Alamos National Laboratory}
 
@@ -168,7 +165,7 @@ centered, text width=2cm, draw=black, text=white,fill=Gray!140!blue!70!white]
 \setlength{\tabcolsep}{6pt}
 
 \begin{frame}
-\frametitle{Outline}
+\frametitle{Overview}
 \begin{minipage}{0.061\linewidth}
 \hfill                      
 \end{minipage}
@@ -188,18 +185,21 @@ subsectionstyle=hide
 \begin{frame}
 \frametitle{Overview}
 \begin{itemize}
-\item We are interested in modeling thermal radiation transport in the high-energy density physics regime
-\begin{itemize}
-\item Temperatures on order of $10^6$ K or more
-\item Significant energy and momentum may be exchanged with material
-\end{itemize}\pause
-\item Radiative transfer simulations important in modeling: 
-\begin{itemize}
-\item Material under extreme conditions
-\item Inertial confinement fusion
-\item Supernovae and other astrophysical phenomena.
+    \item Particles track in straight lines
+    \item Standard Monte Carlo (MC) transport (on ``small'' domains) is embarrassingly parallel
+    \begin{itemize}
+        \item Each processor tracks and scores particles on its copy of the domain
+        \item Reduce tallies at end (fixed cost, independent of number of histories)
+    \end{itemize}
+    \item Want to track over decomposed mesh
+    \begin{itemize}
+        \item Residual MC requires too many tallies to copy efficiently
+     \end{itemize}
 \end{itemize}
-\end{itemize}
+\begin{block}{Goal}
+    Make a simple emulator to look at cost of communicating at boundaries for domain
+    decomposition compared to a domain copy
+\end{block}
 \end{frame}
 
 
