@@ -1,0 +1,206 @@
+\pdfminorversion=4
+\documentclass[xcolor=dvipsnames,hyperref={pdfpagelabels=false},unknownkeysallowed]{beamer}
+\usepackage{tabls}
+\usepackage{graphicx}
+\usepackage{subcaption}
+%\usepackage{animate}
+
+
+
+
+%Load the myriad packages
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=2cm, text
+    width=1.8cm, minimum height=1cm,text centered, text=white,draw=black, fill=Gray!140]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110,
+minimum width=0.5cm, minimum height=1cm, text centered, draw=black,
+fill=blue!20!Gray!90!,text=white]
+\tikzstyle{process} = [rectangle, minimum width=2cm, minimum height=1cm, text
+centered, text width=2cm, draw=black, text=white,fill=Gray!140!blue!70!white]
+\tikzstyle{decision} = [diamond, minimum width=2.0cm, minimum
+    height=0.81cm,aspect=1.40, text centered, draw=black, fill=Gray!,text=white]
+\tikzstyle{arrow} = [thick,line width=0.5mm,->,>=stealth]
+\tikzstyle{arrow1} = [dashed,->,>=stealth]
+
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+\useoutertheme{infolines}
+
+%\definecolor{myblue}{rgb}{0.7, 0.7, 60.0}
+\definecolor{mylightblue}{rgb}{1,1,1}
+\newcommand*{\boxedcolor}{blue}
+\makeatletter
+\renewcommand{\boxed}[1]{\textcolor{\boxedcolor}{%
+  \fbox{\normalcolor\m@th$\displaystyle#1$}}}
+\makeatother
+
+\renewcommand{\u}[1]{\underline{#1}}
+
+\newcommand{\iso}[2]{${}^{{#2}}${#1} }
+\newcommand{\nubar}[0]{$\overline{\nu}$ }
+\newcommand{\keff}[0]{\ensuremath{{k}_{\textsf{eff}}} }
+\newcommand{\expect}[1]{E[#1] }
+\newcommand{\colg}[1]{{\color{ForestGreen} #1}}
+\newcommand{\coly}[1]{{\color{yellow} #1}}
+\newcommand{\colb}[1]{{\color{blue} #1}}
+\newcommand{\colr}[1]{{\color{red} #1}}
+\usepackage{amsfonts}
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{8pt}
+%\addtolength{\wideitemsep}{5pt}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pderiv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\bx}{\mathbf{X}}
+\newcommand{\ba}{\mathbf{A}}
+\newcommand{\by}{\mathbf{Y}}
+\newcommand{\bj}{\mathbf{J}}
+\newcommand{\bs}{\mathbf{s}}
+\newcommand{\B}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Dt}{\Delta t}
+\renewcommand{\d}{\mathsf{d}}
+\newcommand{\mom}[1]{\langle #1 \rangle}
+\newcommand{\cur}[1]{\left\{ #1 \right\}}
+\newcommand{\xl}{{x_{i-1/2}}}
+\newcommand{\xr}{{x_{i+1/2}}}
+\newcommand{\il}{{i-1/2}}
+\newcommand{\ir}{{i+1/2}}
+
+%The next lines automatically add outline slides at start of each section
+\AtBeginSection[]
+{
+    \begin{frame}<*>
+        \frametitle{Outline}
+        \tableofcontents[currentsection,currentsubsection]
+    \end{frame}
+}
+
+
+\setbeamerfont{frametitle}{size=\large}
+\setbeamerfont{normal font}{size=\tiny}
+
+\graphicspath{{figures/}}
+
+\usepackage{verbatim}
+\usepackage{comment}
+\usepackage[]{datetime}
+\usepackage{multirow}
+\newcommand{\thedate}{\today}
+
+
+%\addtobeamertemplate{navigation symbols}{}{ %
+%    \usebeamerfont{footline}%
+%    \usebeamercolor[fg]{footline}%
+%    \insertframenumber/\inserttotalframenumber
+%}
+
+
+% HACKING IN page numbers
+%
+%    \expandafter\def\expandafter\insertlogo\expandafter{%
+%        \insertlogo\hspace{4pt}%
+%        \raisebox{-6.9pt}{\scriptsize{\insertframenumber\,/\,\inserttotalframenumber}}}
+
+\setlength{\tabcolsep}{1.05cm}
+
+%Aggie-themed
+\pgfdeclareimage[height=0.1in]{TAMUlogo}{tamu_engineering.png}
+\logo{\raisebox{-8pt}{\pgfuseimage{TAMUlogo}}}
+\titlegraphic{\centering\begin{tabular}{lr}\includegraphics[trip=4.0in 0.0in 0.0in 0.0in,clip,height=0.18\textheight]{NEUP.jpg} &
+\includegraphics[height=0.18\textheight]{tamu_seal.png}\end{tabular}}
+%Michigan-themed
+%\pgfdeclareimage[height=0.1in]{UMlogo}{michigan_engineering.png}
+%\logo{\raisebox{-8pt}{\pgfuseimage{UMlogo}}}
+%\titlegraphic{\includegraphics[height=0.2\textheight]{michigan_block_m.png}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Optional packages, used to show off certain tricks
+
+\newlength \figwidth
+\setlength \figwidth {0.5\textwidth}
+
+\setlength{\leftmargin}{-2cm}
+\setlength{\rightmargin}{-2cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[english]{babel}
+\usetheme{Frankfurt}
+
+%Make it Aggie Maroon
+\usecolortheme[RGB={80,0,0}]{structure}  
+%Or Michigan Blue
+%\usecolortheme[RGB={0,0,153}]{structure}  
+%Or Michigan Maize
+%\usecolortheme[RGB={255,204,0}]{structure}  
+
+  % This will typeset only the frames (or slides) that have the given label ("current" in this case).
+
+\title[HOLO for TRT]{A High-Order Low-Order Algorithm with Exponentially-Convergent Monte Carlo for
+    Thermal Radiative Transfer}
+    \author[S.R. Bolding]{{\large Simon Bolding\inst{1}, Jim Morel\inst{1}, and Mathew Cleveland\inst{2}}}
+    \institute[]{{\large \inst{1} Texas A\&M University\\ \inst{2} Los Alamos National Laboratory}}
+\date{{MC 2015 - April 22} }
+\subject{}
+%\institute{Los Alamos National Laboratory}
+
+% \classificationlevel{SECRET/RD}
+% \transmissible{}
+
+%\reportnum{\textcolor{blue}{SAMPLE TEMPLATE ONLY \\ Contains NO Classified
+%Information}}
+
+% \dissableframenumber
+\begin{document}
+
+\begin{frame}
+    \titlepage \vspace{-0.213in}
+    \begin{center}
+    \end{center}    
+\end{frame}
+
+\setlength{\tabcolsep}{6pt}
+
+\begin{frame}
+\frametitle{Outline}
+\begin{minipage}{0.061\linewidth}
+\hfill                      
+\end{minipage}
+\begin{minipage}{0.8\linewidth}
+\tableofcontents[
+hideothersubsections,
+sectionstyle=show,
+subsectionstyle=hide
+]
+\end{minipage}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Overview}
+\begin{itemize}
+\item We are interested in modeling thermal radiation transport in the high-energy density physics regime
+\begin{itemize}
+\item Temperatures on order of $10^6$ K or more
+\item Significant energy and momentum may be exchanged with material
+\end{itemize}\pause
+\item Radiative transfer simulations important in modeling: 
+\begin{itemize}
+\item Material under extreme conditions
+\item Inertial confinement fusion
+\item Supernovae and other astrophysical phenomena.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\end{document}
